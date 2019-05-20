@@ -6,31 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".Lista">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/buttonLista"
-            android:layout_width="100dp"
+            android:layout_width="137dp"
             android:layout_height="wrap_content"
             android:text="Lista" />
 
         <Button
             android:id="@+id/buttonMapa"
-            android:layout_width="100dp"
+            android:layout_width="137dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
             android:text="Mapa" />
 
         <Button
             android:id="@+id/button4"
-            android:layout_width="100dp"
+            android:layout_width="137dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="200dp"
             android:text="Button" />
-    </RelativeLayout>
+    </LinearLayout >
 
     <EditText
         android:id="@+id/editText"
@@ -38,5 +36,5 @@
         android:layout_height="143dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="HELLO MADAFAKA" />
+        android:text="HELLO" />
 </RelativeLayout>
