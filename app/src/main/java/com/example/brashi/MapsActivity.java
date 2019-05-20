@@ -40,6 +40,21 @@ public class MapsActivity extends AppCompatActivity
     Location mLastLocation;
     Marker mCurrLocationMarker;
     FusedLocationProviderClient mFusedLocationClient;
+    private GoogleMap mMap;
+    public Button listaOdnosnik;
+
+    public void init(){
+        listaOdnosnik = (Button)findViewById(R.id.buttonLista);
+        listaOdnosnik.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent przenies = new Intent(MapsActivity.this, Lista.class);
+                startActivity(przenies);
+            }
+        });
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +67,7 @@ public class MapsActivity extends AppCompatActivity
 
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
+        init();
     }
 
     @Override
