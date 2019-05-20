@@ -57,6 +57,21 @@ public class Lista extends Activity {
         dataModels.add(new Dzielo("Dzielo 1", "Sławomir Lewandowski", "September 23, 2008"));
         dataModels.add(new Dzielo("Dzielo 2", "Mateusz Kopeć", "February 9, 2009"));
         dataModels.add(new Dzielo("Dzielo 3", "Stanisław Jajor", "April 27, 2009"));
+        dataModels.add(new Dzielo("Dzielo 1", "Sławomir Lewandowski", "September 23, 2008"));
+        dataModels.add(new Dzielo("Dzielo 2", "Mateusz Kopeć", "February 9, 2009"));
+        dataModels.add(new Dzielo("Dzielo 3", "Stanisław Jajor", "April 27, 2009"));
+        dataModels.add(new Dzielo("Dzielo 1", "Sławomir Lewandowski", "September 23, 2008"));
+        dataModels.add(new Dzielo("Dzielo 2", "Mateusz Kopeć", "February 9, 2009"));
+        dataModels.add(new Dzielo("Dzielo 3", "Stanisław Jajor", "April 27, 2009"));
+        dataModels.add(new Dzielo("Dzielo 1", "Sławomir Lewandowski", "September 23, 2008"));
+        dataModels.add(new Dzielo("Dzielo 2", "Mateusz Kopeć", "February 9, 2009"));
+        dataModels.add(new Dzielo("Dzielo 3", "Stanisław Jajor", "April 27, 2009"));
+        dataModels.add(new Dzielo("Dzielo 1", "Sławomir Lewandowski", "September 23, 2008"));
+        dataModels.add(new Dzielo("Dzielo 2", "Mateusz Kopeć", "February 9, 2009"));
+        dataModels.add(new Dzielo("Dzielo 3", "Stanisław Jajor", "April 27, 2009"));
+        dataModels.add(new Dzielo("Dzielo 1", "Sławomir Lewandowski", "September 23, 2008"));
+        dataModels.add(new Dzielo("Dzielo 2", "Mateusz Kopeć", "February 9, 2009"));
+        dataModels.add(new Dzielo("Dzielo 3", "Stanisław Jajor", "April 27, 2009"));
 
         adapter = new CustomListAdapter(dataModels,getApplicationContext());
 
