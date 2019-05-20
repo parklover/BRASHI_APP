@@ -88,10 +88,12 @@ public class MapsActivity extends FragmentActivity
         mGoogleMap = googleMap;
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+
+        //Pobranie lokalizacji po starcie okna
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(120); // two minute interval
-        mLocationRequest.setFastestInterval(120);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+       // mLocationRequest.setInterval(120); // two minute interval
+       // mLocationRequest.setFastestInterval(120);
+       // mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
@@ -129,6 +131,7 @@ public class MapsActivity extends FragmentActivity
 
                 //move map camera
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 25));
+
             }
         }
     };
