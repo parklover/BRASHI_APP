@@ -17,8 +17,8 @@ public class CustomListAdapter extends ArrayAdapter<Dzielo> {
 
     // View lookup cache
     private static class ViewHolder {
-        TextView txtName;
-        TextView txtAuthor;
+        TextView txtNazwa;
+        TextView txtOpis;
         TextView txtDateCreate;
         ImageView info;
     }
@@ -43,8 +43,8 @@ public class CustomListAdapter extends ArrayAdapter<Dzielo> {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.list_row, parent, false);
-            viewHolder.txtName = (TextView) convertView.findViewById(R.id.name);
-            viewHolder.txtAuthor = (TextView) convertView.findViewById(R.id.author);
+            viewHolder.txtNazwa = (TextView) convertView.findViewById(R.id.nazwa);
+            viewHolder.txtOpis = (TextView) convertView.findViewById(R.id.opis);
             viewHolder.txtDateCreate = (TextView) convertView.findViewById(R.id.date_create);
             viewHolder.info = (ImageView) convertView.findViewById(R.id.item_info);
 
@@ -56,9 +56,9 @@ public class CustomListAdapter extends ArrayAdapter<Dzielo> {
             result = convertView;
         }
 
-        viewHolder.txtName.setText(dzielo.getName());
-        viewHolder.txtAuthor.setText(dzielo.getAuthor());
-        viewHolder.txtDateCreate.setText(dzielo.getDateCreate());
+        viewHolder.txtNazwa.setText(dzielo.getNazwa());
+        viewHolder.txtOpis.setText(dzielo.getOpis());
+        viewHolder.txtDateCreate.setText(dzielo.getData_powstania().toString());
         // Return the completed view to render on screen
         return convertView;
     }

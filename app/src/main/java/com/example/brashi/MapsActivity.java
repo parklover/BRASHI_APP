@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Looper;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -31,7 +34,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity
@@ -43,8 +53,11 @@ public class MapsActivity extends FragmentActivity
     Location mLastLocation;
     Marker mCurrLocationMarker;
     FusedLocationProviderClient mFusedLocationClient;
-    private GoogleMap mMap;
     public Button listaOdnosnik;
+    public Button profilOdnosnik;
+    private DatabaseReference Database;
+    private FirebaseDatabase firebase;
+    ArrayList<Dzielo> dziela;
 
     public void init(){
         listaOdnosnik = (Button)findViewById(R.id.buttonLista);
@@ -52,6 +65,15 @@ public class MapsActivity extends FragmentActivity
             @Override
             public void onClick(View v){
                 Intent przenies = new Intent(MapsActivity.this, Lista.class);
+                startActivity(przenies);
+            }
+        });
+
+        profilOdnosnik = (Button)findViewById(R.id.button4);
+        profilOdnosnik.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent przenies = new Intent(MapsActivity.this, DzieloAddFormActivity.class);
                 startActivity(przenies);
             }
         });
@@ -64,12 +86,41 @@ public class MapsActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-       // getSupportActionBar().setTitle("Map Location Activity");
+        firebase = FirebaseDatabase.getInstance();
+        Database = firebase.getReference("Dziela");
+
+        dziela = new ArrayList<>();
+
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Dzielo dzielo = ds.getValue(Dzielo.class);
+                    dziela.add(dzielo);
+
+                    LatLng latlng = new LatLng(dzielo.getLat(), dzielo.getLng());
+                    MarkerOptions options = new MarkerOptions().position(latlng).title(dzielo.getNazwa());
+                    mGoogleMap.addMarker(options);
+
+                }
+
+                //Do what you need to do with your list
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("DUPA", databaseError.getMessage()); //Don't ignore errors!
+            }
+        };
+        Database.addListenerForSingleValueEvent(valueEventListener);
+
+        Toast.makeText(this, "DZIAŁA BAZKA MAXI", Toast.LENGTH_SHORT).show();
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
+
         init();
     }
 
@@ -111,6 +162,7 @@ public class MapsActivity extends FragmentActivity
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
             mGoogleMap.setMyLocationEnabled(true);
         }
+
     }
 
     LocationCallback mLocationCallback = new LocationCallback() {
@@ -130,8 +182,8 @@ public class MapsActivity extends FragmentActivity
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
                 //move map camera
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 25));
-
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));
+//                mGoogleMap.addMarker(new MarkerOptions().position(latLng).title("MOJA LOKALIZACJA"));
             }
         }
     };

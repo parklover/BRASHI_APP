@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BRASHI</string>
     <string name="title_activity_maps">BRASHI</string>
+    <string name="title_activity_dzielo_add_form">DzieloAddFormActivity</string>
 </resources>
